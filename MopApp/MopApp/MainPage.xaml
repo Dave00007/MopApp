@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MopApp"
+             x:Class="MopApp.MainPage">
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="10">
+            <!-- Place new controls here -->
+            
+                <Label x:Name="firstLabel"
+               Text="Welcom to Xamarin.Forms!" 
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18"/>
+        <Label x:Name="secondLabel"
+               Text="Welcom to Xamarin.Forms222!" 
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18"/>
+        <Editor x:Name="editText"
+                Text="Input text"
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand"
+                FontSize="18"
+                
+                /> 
+           
+            <Button x:Name="postButton" 
+              Text="POST something"
+              HorizontalOptions = "FillAndExpand"
+              HeightRequest = "42"
+              BackgroundColor = "#77d065"
+              BorderColor = "Black"
+              BorderRadius = "5"
+              BorderWidth = "0"
+              TextColor = "White"/>
+        <Button x:Name="idButton"
+              Text="GET first value"
+              HorizontalOptions = "FillAndExpand"
+              HeightRequest = "42"
+              BackgroundColor = "#77d065"
+              BorderColor = "Black"
+              BorderRadius = "5"
+              BorderWidth = "0"
+              TextColor = "White"/>
+        <Button x:Name="titleButton" 
+              Text="GET second value"
+              HorizontalOptions = "FillAndExpand"
+              HeightRequest = "42"
+              BackgroundColor = "#77d065"
+              BorderColor = "Black"
+              BorderRadius = "5"
+              BorderWidth = "0"
+              TextColor = "White"/>
+
+    </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

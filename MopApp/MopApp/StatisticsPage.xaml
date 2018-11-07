@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MopApp.StatisticsPage">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label x:Name="minTempLabel"
+               Text="Min Temp:" 
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18"/>
+            <Label x:Name="minTempValueLabel"
+               Text=""
+               Font="Bold,30"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18"/>
+            
+            <Label x:Name="maxTempLabel"
+               Text="Max Temp:" 
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18"/>
+            <Label x:Name="maxTempValueLabel"
+               Text="" 
+               Font="Bold,30"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18"/>
+
+            <Label x:Name="avgTempLabel"
+               Text="AVG Temp:" 
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18"/>
+            <Label x:Name="avgTempValueLabel"
+               Text="" 
+               Font="Bold,30"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18"/>
+
+
+            <Button x:Name="getStatButton"
+              Text="Gain Statictics"
+              HorizontalOptions = "FillAndExpand"
+              HeightRequest = "42"
+              BackgroundColor = "#77d065"
+              BorderColor = "Black"
+              BorderRadius = "5"
+              BorderWidth = "0"
+              TextColor = "White"/>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

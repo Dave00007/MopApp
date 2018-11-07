@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:MopApp" 
+              x:Class="MopApp.MainCarouselPage">
+        
+   <ContentPage>
+        <ContentPage.Content>
+            <StackLayout Padding="10" Spacing="10">
+
+               <Editor x:Name="editText"
+               Text="Input text"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18" />
+
+              <Button x:Name="postButton" 
+              Text="POST something"
+              HorizontalOptions = "FillAndExpand"
+              HeightRequest = "42"
+              BackgroundColor = "#77d065"
+              BorderColor = "Black"
+              BorderRadius = "5"
+              BorderWidth = "0"
+              TextColor = "White"/>
+            
+            </StackLayout>
+
+        </ContentPage.Content>
+    </ContentPage>
+
+    <local:StatisticsPage></local:StatisticsPage>
+    <local:ChartPage></local:ChartPage>
+    
+</CarouselPage>
