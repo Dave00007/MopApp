@@ -11,7 +11,7 @@ namespace MopApp
         {
             InitializeComponent();
 
-            MainPage = new MainCarouselPage();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

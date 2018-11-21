@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Collections.ObjectModel;
@@ -12,6 +8,7 @@ using Newtonsoft.Json;
 using Entry = Microcharts.Entry;
 using Microcharts;
 using SkiaSharp;
+using System.Globalization;
 
 namespace MopApp
 {
@@ -20,54 +17,62 @@ namespace MopApp
     public partial class ChartPage : ContentPage
     {
         public readonly HttpClient _client = new HttpClient();
-        public ObservableCollection<Post> _posts;
+        private ObservableCollection<TempOnDeviceWeekly> tempOnDeviceWeekly;
         private List<Entry> entries = new List<Entry> {};
-     
-        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
-        {
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
-        }
-        
+        private string url = "http://ec2-18-184-187-189.eu-central-1.compute.amazonaws.com/api/temperature/plot/";
+
+        internal ObservableCollection<TempOnDeviceWeekly> TempOnDeviceWeekly { get => tempOnDeviceWeekly; set => tempOnDeviceWeekly = value; }
+
         public ChartPage ()
 		{
 			InitializeComponent ();
-            createEntries();
-            Average.Chart = new LineChart {Entries = entries}; 
-            getChartButton.Clicked += receiveSecondRecord;
+            loadPickerData();
+
         }
 
-        private async void receiveSecondRecord(object sender, EventArgs e)
-        {
-            string content = await _client.GetStringAsync(MainCarouselPage.Url);
-            List<Post> posts = JsonConvert.DeserializeObject<List<Post>>(content);
-            _posts = new ObservableCollection<Post>(posts);
+        public void loadPickerData()
+        { 
+            var listData = new List<string>();
+            listData.Add("Xiaomi");
+            listData.Add("Samsung");
+            listData.Add("Apple");
+            devicesPicker.ItemsSource = listData;
         }
 
+         private async void receiveSecondRecord(object sender, EventArgs e)
+          {
+            var selectedDeviceIndex = devicesPicker.SelectedIndex;
+            var selectedDeviceName = devicesPicker.SelectedItem;
 
-        public void createEntries()
-        {
-            Random rnd = new Random();
+            chartTitle.Text = "Average Temperature(weekly) on " + selectedDeviceName + " device";
+            entries.Clear();
 
-            for (int i = 0; i <= 52; i++)
-            {
-                float value = rnd.Next(-10, 40);
+            string content = await _client.GetStringAsync(createUrl(selectedDeviceIndex + 1));
+            List<TempOnDeviceWeekly> averageTempOnDeviceWeekly = JsonConvert.DeserializeObject<List<TempOnDeviceWeekly>>(content);
+            TempOnDeviceWeekly = new ObservableCollection<TempOnDeviceWeekly>(averageTempOnDeviceWeekly);
+
+            for (int i = 0; i <= 51; i++)
+             {
+                float value = float.Parse(TempOnDeviceWeekly[i].AvgResult, CultureInfo.InvariantCulture.NumberFormat);
                 Entry tmp = new Entry(value)
                 {
-                    ValueLabel = value.ToString(),
+                    ValueLabel = TempOnDeviceWeekly[i].AvgResult.Substring(0,5),
                     Color = getColorFromValue(value),
                 };
-                if (i % 4 == 0)
-                {
-                   // tmp.Label = i.ToString();
-                }
-                entries.Add(tmp);
-            }
 
+                entries.Add(tmp);
+             } 
+            
+            Average.Chart = new LineChart { Entries = entries };
+
+          }
+
+        public string createUrl(int deviceIndex)
+        {
+            return url + deviceIndex.ToString() + "/";
         }
 
-        public SKColor getColorFromValue(float value)
+        public static SKColor getColorFromValue(float value)
         {
             if (value > 35) return SKColor.Parse("ff5533");
             if (value > 30) return SKColor.Parse("ff8a33");
@@ -81,5 +86,13 @@ namespace MopApp
             if (value < 0) return SKColor.Parse("4d7ef7");
             return SKColor.Parse("1e2d2e");
         }
+    
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
+
     }
 }

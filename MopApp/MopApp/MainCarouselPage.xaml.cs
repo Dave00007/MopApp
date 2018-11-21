@@ -14,15 +14,15 @@ namespace MopApp
         public readonly HttpClient _client = new HttpClient();
         public ObservableCollection<Post> _posts;
 
-        public MainCarouselPage()
-        {
-            InitializeComponent();
-            postButton.Clicked += postSomeValue;
-        }
+       // public MainCarouselPage()
+      //  {
+        //    InitializeComponent();
+        //    postButton.Clicked += postSomeValue;
+       // }
 
         private async void postSomeValue(object sender, EventArgs e)
         {
-            Post post = new Post { Name = $"Name: Dave" }; //Creating a new instane of Post with a Title Property and its value in a Timestamp format
+            Post post = new Post { Week = $"Name: Dave" }; //Creating a new instane of Post with a Title Property and its value in a Timestamp format
             string content = JsonConvert.SerializeObject(post); //Serializes or convert the created Post into a JSON String
             await _client.PostAsync(Url, new StringContent(content, Encoding.UTF8, "application/json")); //Send a POST request to the specified Uri as an asynchronous operation and with correct character encoding (utf9) and contenct type (application/json).
         }

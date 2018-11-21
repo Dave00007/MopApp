@@ -7,32 +7,32 @@ using Newtonsoft.Json;
 
 namespace MopApp
 {
-    public class Post : INotifyPropertyChanged
+    class TempOnDeviceWeekly : INotifyPropertyChanged
     {
         public int Id { get; set; }
 
         private string _week;
         private string _avgResult;
 
-        [JsonProperty("week")] //This maps the element title of your web service to your model
+        [JsonProperty("week")] 
         public string Week
         {
             get => _week;
             set
             {
                 _week = value;
-                OnPropertyChanged(); //This notifies the View or ViewModel that the value that a property in the Model has changed and the View needs to be updated.
+                OnPropertyChanged();
             }
         }
 
-        [JsonProperty("avgResult")] //This maps the element title of your web service to your model
+        [JsonProperty("avgResult")]
         public string AvgResult
         {
             get => _avgResult;
             set
             {
                 _avgResult = value;
-                OnPropertyChanged(); //This notifies the View or ViewModel that the value that a property in the Model has changed and the View needs to be updated.
+                OnPropertyChanged(); 
             }
         }
 
@@ -44,4 +44,5 @@ namespace MopApp
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+   
 }

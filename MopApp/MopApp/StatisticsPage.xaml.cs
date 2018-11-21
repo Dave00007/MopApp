@@ -27,7 +27,7 @@ namespace MopApp
             string content = await _client.GetStringAsync(MainCarouselPage.Url);
             List<Post> posts = JsonConvert.DeserializeObject<List<Post>>(content);
             _posts = new ObservableCollection<Post>(posts);
-            minTempValueLabel.Text = _posts[0].Name;
+            minTempValueLabel.Text = _posts[0].Week;
         }
 
     }

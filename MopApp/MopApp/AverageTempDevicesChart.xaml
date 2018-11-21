@@ -2,23 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-                x:Class="MopApp.ChartPage">
+             x:Class="MopApp.AverageTempDevicesChart">
     <ContentPage.Content>
         <StackLayout>
-            <Picker x:Name="devicesPicker"
-                Title="-Select device-"
-                SelectedIndexChanged="receiveSecondRecord"/>
-           
-            <Label x:Name="chartTitle"
-               Text="Average Temperature (weekly)" 
+            <Label x:Name="maxTempLabel"
+               Text="Max Temp:" 
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"
+               FontSize="18"/>
+            <Label 
+               Text="Average Temperature on Devices" 
                Font="Bold,25"
                HorizontalOptions="Center"
-               FontSize="9"/>
-            
-            <forms:ChartView x:Name ="Average"
+               FontSize="14"/>
+
+            <forms:ChartView x:Name ="AverageTempDevices"
              VerticalOptions="FillAndExpand"/>
-   
-          <!--<Button x:Name="getChartButton" 
+
+           <!-- <Button x:Name="getChartButton" 
               Text="Gain Chart"
               HorizontalOptions = "FillAndExpand"
               HeightRequest = "42"
@@ -28,6 +29,6 @@
               BorderWidth = "0"
               TextColor = "White"/> -->
         </StackLayout>
-        
+
     </ContentPage.Content>
 </ContentPage>
